@@ -36,5 +36,26 @@ members = {}
 next_book_number = 1
 next_member_number = 1
 while True:
+  print("1.Add a book\n2.Register a member\n3.Borrow a book\n4.Return a book\n5.Search the catalogue\n6.Member summary\n7.Library report\n8.Exit")
+  choice = input("Enter your choice: ")
+  if choice == "1":
+    add_book(books) 
+  elif choice == "2":
+    register_member(members)
+  elif choice == "3":
+    borrow_books(books, members)
+  elif choice == "4":
+    return_book(books, members)
+  elif choice == "5":
+    search_catalogue(books)
+  elif choice == "6":
+    members_summary(books, members)
+  elif choice == "7":
+    library_report(books, members)
+  elif choice == "8":
+    print("Goodbye")
+    break
+  else:
+    print("Invalid choice. Please try again.")
   
   
