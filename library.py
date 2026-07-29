@@ -131,7 +131,19 @@ def return_book(books, members):
     
 # Case-insensitive keywords search over titles
 def search_catalogue(books):
-  pass
+  keyword = input("Enter the keyword: ")
+  if not books:
+    print("The library is empty")
+    return
+  match_found = False
+  for book_id in books:
+    book_info = books[book_id]
+    if keyword.lower() in book_info['title'].lower():
+      print(f"{book_id}: {book_info['title']} by {book_info['author']} - {book_info['available_copies']} of {book_info['total_copies']} available")
+      match_found = True
+  if not match_found:
+    print("No books match that search")
+    
 # Prints one member with the TITLES of their borrowed books
 def members_summary(books, members):
   pass
