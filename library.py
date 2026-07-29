@@ -112,7 +112,23 @@ def borrow_books(books, members):
   
 # One member returns one bok - updates BOTH dicts
 def return_book(books, members):
-  pass
+  member_id = input("Enter the member ID: ")
+  book_id = input("Enter the book ID: ")
+  if member_id not in members:
+    print(f'{member_id} not found')
+    return
+  member_info = members[member_id]
+  if book_id not in member_info['borrowes_books']:
+    print(f'{member_id} does not have {book_id} out')
+    return
+  book_info = books[book_id]
+  if book_id in member_info['borrowed_books']:
+    member_info['borrowed_books'].remove(book_id)
+    available_copies = book_info['available_copies']
+    available_copies += 1
+    book_info['available_copies'] = available_copies
+    print(f"{member_id} returned {book_id}: {book_info['title']} ")
+    
 # Case-insensitive keywords search over titles
 def search_catalogue(books):
   pass
