@@ -11,7 +11,61 @@ def read_valid_copies():
   pass
 # Adds a new book OR adds copies to an existing titile by the same author
 def add_book(books):
-  pass
+  global next_book_number 
+
+  title = input("Enter the book title: ")
+  author = input("Enter the author of the book: ")
+  number_of_copies = read_valid_copies()
+
+  if not title:
+    print("The tittle cannot be empty")
+    return
+  if not author:
+    print("The author cannot be empty")
+    return
+  
+  # Check for duplicates books
+  for book_id in books:
+    book_info = books[book_id]
+    if book_info['title'].lower() == title.lower() and book_info['author'].lower() == author.lower():
+      print("The book already exist, do not create the duplicate")
+      total_copies = book_info['total_copies']
+      total_copies += number_of_copies
+      book_info['total_copies'] = total_copies
+      available_copies = book_info['available_copies']
+      available_copies += number_of_copies
+      book_info['available_copies'] = available_copies 
+      print(f'Added {number_of_copies} more copies of {book_id}:{title} now has {available_copies} total copies')
+
+  # No duplicates found, create a new book
+  book_id = "B" + str(next_book_number)
+  next_book_number += 1
+  total_copies = number_of_copies
+  available_copies = number_of_copies
+  books[book_id] = {
+    "title": title,
+    "author": author,
+    "total_copies": total_copies,
+    "available_copies": available_copies,
+    "times_borrowed": 0 
+   }
+  print(f'Added {number_of_copies} copies of {title} by {author}')
+
+def read_valid_copies():
+  while True:
+    try:
+     number_of_copies = int(input("Enter the number of copies: "))
+     if number_of_copies <= 0:
+       print('That is not a valid number of copies.Please try again')
+     else:
+       return number_of_copies
+    except ValueError:
+      print("That is not a valid number of copies")
+
+   
+  
+  
+
 # Register a new member with an empty borrowed list
 def register_member(members):
   pass
