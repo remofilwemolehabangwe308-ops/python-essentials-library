@@ -145,8 +145,20 @@ def search_catalogue(books):
     print("No books match that search")
     
 # Prints one member with the TITLES of their borrowed books
-def members_summary(books, members):
-  pass
+def member_summary(books, members):
+  member_id = input("Enter the member ID: ")
+  if member_id not in members:
+    print(f"{member_id} not found")
+    return
+  member_info = members[member_id]
+  print(f"{member_id}: {member_info['name']} (books out: {len(member_info['borrowed_books'])} of 3 allowed)")
+  if not member_info['borrowed_books']:
+    print("(No books out)")
+  else:
+    for book_id in member_info['borrowed_books']:
+      book_info = books[book_id]
+      print(f"{book_id}: {book_info['title']} by {book_info['author']}")
+      
 # Prints the whole-library report
 def library_report(books, members):
   pass
