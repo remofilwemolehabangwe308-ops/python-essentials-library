@@ -62,13 +62,26 @@ def read_valid_copies():
     except ValueError:
       print("That is not a valid number of copies")
 
-   
-  
-  
-
 # Register a new member with an empty borrowed list
 def register_member(members):
-  pass
+  global next_member_number
+  member_name = input("Enter the name of the member: ")
+  if not member_name:
+    print("The member is blank, Rejected!!")
+    return
+  for member_id in members:
+    if member_id in members:
+      print(f'Member {member_id} already exist')
+      return
+  member_id = "M" + str(next_member_number)
+  members[member_id] = {
+    "name" : member_name,
+    "borrowed_books" : []
+  }
+  next_member_number += 1
+  print(f'Registered {member_id}; {member_name}')
+
+  
 # One member borrows one book - enforces ALL the rules, updates BOTH dicts
 def borrow_books(books, members):
   pass
