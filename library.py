@@ -2,10 +2,28 @@
 
 # Returns (total_copies, copies_available) across the whole library as a tuple 
 def library_totals(books):
-  pass
+  total_copies = 0
+  available_copies = 0
+  for book_id in books:
+    book_info = books[book_id]
+    total_copies += book_info['total_copies']
+    available_copies += book_info['available_copies']
+  return total_copies, available_copies
+  
 # Returns the book ID of the most-borrowed book, or None of no books
 def most_borrowed(books):
-  pass
+  if not books:
+    return None
+  first_book_id = next(iter(books))
+  most_borrowed_book = first_book_id
+  most_borrowed_book_count = books['first_book_id']['times_borrowed']
+  for book_id in books:
+    book_info = books[book_id]
+    if book_info['times_borrowed'] > most_borrowed_book_count:
+      most_borrowed_book_count = book_info['times_borrowed']
+      most_borrowed_book = book_id
+  return most_borrowed_book
+  
 # Asks for a number of copies, validates with try-except, returns int or None 
 def read_valid_copies():
   pass
@@ -161,7 +179,42 @@ def member_summary(books, members):
       
 # Prints the whole-library report
 def library_report(books, members):
-  pass
+  if not books:
+    print("The library is empty")
+    return
+  total_copies, available_copies = library_totals(books)
+  copies_out = total_copies - available_copies
+
+  highly_borrowed_book = most_borrowed(books)
+  book_info = books[highly_borrowed_book]
+
+  number_of_members = len(members)
+
+  print(f"Number of titles: {len(books)}")
+  print(f"Total copies: {total_copies}")
+  print(f"Available copies: {available_copies}")
+  print(f"Copies out on loan: {copies_out}")
+
+  print("Most borrowed book:")
+  print(f" ID: {highly_borrowed_book}")
+  print(f" Title: {book_info['title']}")
+  print(f" Times borrowed: {book_info['times_borrowed']}")
+
+  print(f"Registered members: {number_of_members}")
+
+  print("Members at 3-book limit:")
+
+  found = False
+
+  for member_id in members:
+      member_info = members[member_id]
+
+      if len(member_info['borrowed_books']) == 3:
+        print(f"{member_id} : {member_info['name']}")
+        found = True
+
+  if not found:
+      print('None')
 # ----main program----
 books = {}
 members = {}
