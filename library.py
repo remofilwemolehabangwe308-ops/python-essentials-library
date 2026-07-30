@@ -102,10 +102,10 @@ def register_member(members):
   
 # One member borrows one book - enforces ALL the rules, updates BOTH dicts
 def borrow_books(books, members):
-  member_id = input("Enter the number ID: ")
+  member_id = input("Enter the member ID: ")
   book_id = input("Enter the book ID: ")
   if member_id not in members:
-    print("Mmeber ID not found")
+    print("Member ID not found")
     return
   if book_id not in books:
     print("Book ID not found")
