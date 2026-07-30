@@ -163,7 +163,7 @@ def search_catalogue(books):
     print("No books match that search")
     
 # Prints one member with the TITLES of their borrowed books
-def member_summary(books, members):
+def members_summary(books, members):
   member_id = input("Enter the member ID: ")
   if member_id not in members:
     print(f"{member_id} not found")
