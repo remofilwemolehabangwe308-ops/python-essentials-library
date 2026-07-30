@@ -16,7 +16,7 @@ def most_borrowed(books):
     return None
   first_book_id = next(iter(books))
   most_borrowed_book = first_book_id
-  most_borrowed_book_count = books['first_book_id']['times_borrowed']
+  most_borrowed_book_count = books[first_book_id]['times_borrowed']
   for book_id in books:
     book_info = books[book_id]
     if book_info['times_borrowed'] > most_borrowed_book_count:
@@ -136,7 +136,7 @@ def return_book(books, members):
     print(f'{member_id} not found')
     return
   member_info = members[member_id]
-  if book_id not in member_info['borrowes_books']:
+  if book_id not in member_info['borrowed_books']:
     print(f'{member_id} does not have {book_id} out')
     return
   book_info = books[book_id]
